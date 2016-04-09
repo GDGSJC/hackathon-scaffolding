@@ -1,39 +1,61 @@
 package com.example.saemi.hackadengue;
 
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
+import android.os.Handler;
+import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.common.api.GoogleApiClient;
+import com.example.saemi.hackadengue.Utils.Allactivits;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity {
 
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
-
-    Button b;
+    // Splash screen timer
+    private static int SPLASH_TIME_OUT = 3000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        b = (Button)findViewById(R.id.b);
-        b.setOnClickListener(this);
 
- }
+        Allactivits.mainActivity= MainActivity.this;
+        new Handler().postDelayed(new Runnable() {
+
+            /*
+             * Showing splash screen with a timer. This will be useful when you
+             * want to show case your app logo / company
+             */
+
+            @Override
+            public void run() {
+                Intent mainIntent = new Intent(MainActivity.this,MapsActivity.class);
+                startActivity(mainIntent);
+                finish();
+
+                finish();
+            }
+        }, SPLASH_TIME_OUT);
+    }
 
     @Override
-    public void onClick(View v) {
+    public boolean onCreateOptionsMenu(Menu menu) {
 
-        Intent i = new Intent(MainActivity.this, MapsActivity.class);
-        startActivity(i);
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.empty, menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        //int id = item.getItemId();
+        //if (id == R.id.action_settings) {
+        //    return true;
+        //}
+        return super.onOptionsItemSelected(item);
     }
 }
